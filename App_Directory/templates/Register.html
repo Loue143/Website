@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register | Sweet Sip Milk Tea</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: url("{{ url_for('static', filename='images/backroundsa.jpg') }}") no-repeat center center/cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+    }
+
+    /* ===== Header ===== */
+    header {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.75); /* darker overlay for visibility */
+      padding: 15px 40px;
+      display: flex;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      box-sizing: border-box;
+      z-index: 1000; /* keeps header above all other elements */
+    }
+
+    header img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      margin-right: 15px;
+      border: 2px solid #32cd32; /* optional: light green border for clarity */
+    }
+
+    header h1 {
+      color: #32cd32; /* Green text */
+      font-size: 1.8em;
+      margin: 0;
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+
+    /* ===== Register Box ===== */
+    .register-box {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      width: 300px;
+      margin-top: 140px; /* ensures spacing below fixed header */
+      z-index: 10;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    button {
+      background-color: #ff7f50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff9966;
+    }
+
+    a {
+      color: #ffcc99;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      color: #ff9999;
+      margin-top: 5px;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background: rgba(0, 0, 0, 0.75);
+      text-align: center;
+      padding: 10px;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      font-size: 0.9em;
+      z-index: 1000; /* keeps footer on top too */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Pan-Tea Logo">
+    <h1>Pan-Tea</h1>
+  </header>
+
+  <!-- Registration Form -->
+  <div class="register-box">
+    <h2>Create Account</h2>
+    <form method="POST">
+      <input type="text" name="username" placeholder="Username" required><br>
+      <input type="password" name="password" placeholder="Password" required><br>
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="/login">Login</a></p>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Sweet Sip Milk Tea | All Rights Reserved
+  </footer>
+
+</body>
+</html>

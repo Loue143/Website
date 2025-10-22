@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milk Tea Shop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">  <!-- Link to external CSS file -->
+    <style>
+        /* General Reset */
+        body, h1, p {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Background color */
+        body {
+            background-color: #f7f7f7;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* Title */
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-top: 40px;
+            color: #6c63ff;
+        }
+
+        /* Container for the grid */
+        .tea-item-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;  /* Space between items */
+            justify-content: center;  /* Center the items horizontally */
+            padding: 20px;
+            max-width: 1200px; /* Limits the container width on large screens */
+            margin: 0 auto; /* Centers the container on the page */
+        }
+
+        /* Each tea item */
+        .tea-item {
+            text-align: center;
+            display: inline-block;
+            width: 200px;  /* Fixed width for each image container */
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .tea-item a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Image styling */
+        .tea-item a img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Product name outside the container */
+        .product-name {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        /* Hover effect */
+        .tea-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .tea-item a:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Optional: Responsive design for larger screens */
+        @media (min-width: 768px) {
+            .tea-item {
+                width: 250px;  /* Adjust width on larger screens */
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .tea-item-container {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to Our Milk Tea Shop!</h1>
+
+    <div class="tea-item-container">
+        <div class="tea-item">
+            <a href="{{ url_for('order') }}">
+                <img src="{{ url_for('static', filename='images/milk.jpg') }}" alt="Classic Milk Tea">
+            </a>
+            <div class="product-name">Classic Milk Tea - $4.50</div>
+        </div>
+
+        <div class="tea-item">
+            <a href="{{ url_for('order') }}">
+                <img src="{{ url_for('static', filename='images/milk3.jpg') }}" alt="Taro Milk Tea">
+            </a>
+            <div class="product-name">Taro Milk Tea - $5.00</div>
+        </div>
+
+        <div class="tea-item">
+            <a href="{{ url_for('order') }}">
+                <img src="{{ url_for('static', filename='images/milk4.jpg') }}" alt="Matcha Milk Tea">
+            </a>
+            <div class="product-name">Matcha Milk Tea - $5.50</div>
+        </div>
+
+        <div class="tea-item">
+            <a href="{{ url_for('order') }}">
+                <img src="{{ url_for('static', filename='images/brown_sugar.jpg') }}" alt="Brown Sugar Milk Tea">
+            </a>
+            <div class="product-name">Brown Sugar Milk Tea - $5.00</div>
+        </div>
+
+        <div class="tea-item">
+            <a href="{{ url_for('order') }}">
+                <img src="{{ url_for('static', filename='images/honeydew.jpg') }}" alt="Honeydew Milk Tea">
+            </a>
+            <div class="product-name">Honeydew Milk Tea - $4.75</div>
+        </div>
+    </div>
+
+</body>
+</html>

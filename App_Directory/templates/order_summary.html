@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 50px auto; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        h1 { text-align: center; color: #333; }
+        .summary { font-size: 18px; margin-bottom: 20px; }
+        .total { font-size: 20px; font-weight: bold; color: #ff6347; }
+        button { background-color: #ffb6b9; color: white; border: none; cursor: pointer; padding: 10px; }
+        button:hover { background-color: #ff9a9d; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Order Summary</h1>
+    <div class="summary">
+        <p>Flavor: {{ flavor }}</p>
+        <p>Size: {{ size }}</p>
+        <p>Quantity: {{ quantity }}</p>
+        <p class="total">Total Price: ${{ total_price }}</p>
+    </div>
+    <button onclick="window.location.href='/'">Back to Order</button>
+</div>
+
+</body>
+</html>

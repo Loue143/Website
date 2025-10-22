@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sweet Sip Milk Tea</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: url("{{ url_for('static', filename='images/backroundsa.jpg') }}") no-repeat center center/cover;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      text-align: center;
+    }
+
+    /* Header (same color as footer) */
+    header {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 40px;
+      box-sizing: border-box;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+
+    /* Logo and brand name */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+    }
+
+    header h2 {
+      font-size: 1.8em;
+      margin: 0;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    /* Navigation buttons */
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      background-color: #32cd32; /* Green buttons */
+      color: white;
+      padding: 8px 18px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1em;
+      transition: background 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #45e645;
+    }
+
+    /* Main content */
+    .content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      backdrop-filter: brightness(0.85);
+      margin-top: 100px; /* Prevent overlap with header */
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .content h1 {
+      font-size: 3em;
+      margin-bottom: 0.2em;
+    }
+
+    .content p {
+      font-size: 1.2em;
+      margin-bottom: 1.5em;
+      max-width: 500px;
+    }
+
+    a.button {
+      background-color: #ff7f50;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: background 0.3s ease;
+    }
+
+    a.button:hover {
+      background-color: #ff9966;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 0;
+      text-align: center;
+      font-size: 0.9em;
+      color: #ddd;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Pan-Tea Logo">
+      <h2>Pan-Tea</h2>
+    </div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About Us</a>
+      <a href="/contact">Contact Us</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h1>Welcome to Sweet Sip Milk Tea</h1>
+    <p>Freshly brewed milk tea made just for you. Customize your flavor and size!</p>
+    <a href="/menu" class="button">Order Now</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Pan-Tea. All rights reserved.
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us - Pan-Tea</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: #fff7ec; /* soft cream background */
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Header */
+    header {
+      width: 100%;
+      background-color: #8bc34a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 50px;
+      box-sizing: border-box;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: white;
+    }
+
+    header h2 {
+      color: white;
+      font-size: 1.8em;
+      margin: 0;
+    }
+
+    /* Nav Buttons */
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      background-color: green;
+      color: white;
+      padding: 8px 18px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background-color: #3fa63f;
+    }
+
+    /* Main Content */
+    .container {
+      background-color: white;
+      max-width: 600px;
+      margin-top: 150px;
+      padding: 40px 50px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+
+    .container h1 {
+      text-align: center;
+      color: #4CAF50;
+      margin-bottom: 20px;
+    }
+
+    .container p {
+      line-height: 1.7;
+      font-size: 1em;
+      color: #444;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #8bc34a;
+      color: white;
+      text-align: center;
+      padding: 12px 0;
+      font-size: 0.9em;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Pan-Tea Logo">
+      <h2>Pan-Tea</h2>
+    </div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About Us</a>
+      <a href="/contact">Contact Us</a>
+    </nav>
+  </header>
+
+  <!-- Content Box -->
+  <div class="container">
+    <h1>About Pan-Tea</h1>
+    <p>
+      Welcome to <strong>Pan-Tea</strong> — where every sip is brewed with passion and perfection!
+      Our journey began with a simple dream: to create the perfect milk tea blend that brings happiness
+      in every cup. Using only the finest tea leaves, creamy milk, and natural flavors, we make sure
+      each drink is crafted fresh just for you.
+    </p>
+    <p>
+      From our humble beginnings to becoming a favorite among tea lovers, Pan-Tea continues to grow
+      with one goal in mind — to serve sweetness, comfort, and joy in every glass.
+    </p>
+    <p>
+      Join us and experience the love we pour into every cup. 🍃
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Pan-Tea. All rights reserved.
+  </footer>
+</body>
+</html>
