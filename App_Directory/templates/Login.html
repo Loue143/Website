@@ -3,35 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <title>Login | Sweet Sip Milk Tea</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      height: 100vh;
-      background: url("{{ url_for('static', filename='images/bg.jpg') }}") no-repeat center center/cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      min-height: 100vh;
+      background: url("{{ url_for('static', filename='images/backroundsa.jpg') }}") no-repeat center center/cover;
       font-family: 'Poppins', sans-serif;
       color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .login-box {
+    /* ===== HEADER ===== */
+    header {
+      width: 100%;
       background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 30px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+    }
+
+    header h2 {
+      color: #fff;
+      margin: 0;
+      font-size: 1.5em;
+      letter-spacing: 0.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+    }
+
+    nav a {
+      background-color: rgba(50, 205, 50, 0.85);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.9em;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    nav a:hover {
+      background-color: rgba(69, 230, 69, 1);
+      transform: scale(1.05);
+    }
+
+    /* ===== LOGIN BOX ===== */
+    .login-box {
+      background: rgba(0, 0, 0, 0.65);
       padding: 40px;
       border-radius: 15px;
       text-align: center;
-      width: 300px;
+      width: 350px;
+      margin-top: 160px; /* space below header */
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      backdrop-filter: blur(6px);
     }
 
-    h2 {
+    .login-box h2 {
       margin-bottom: 20px;
+      font-size: 1.5em;
+      color: #fff;
     }
 
     input {
       width: 90%;
       padding: 10px;
-      margin: 10px 0;
+      margin: 8px 0;
       border: none;
       border-radius: 8px;
       outline: none;
@@ -41,41 +108,71 @@
       background-color: #ff7f50;
       color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 10px 25px;
       border-radius: 25px;
       cursor: pointer;
       transition: 0.3s;
+      margin-top: 10px;
+      font-weight: bold;
     }
 
     button:hover {
       background-color: #ff9966;
+      transform: translateY(-2px);
+    }
+
+    ul { list-style: none; padding: 0; }
+    li { color: #ff9999; margin-top: 5px; }
+
+    p {
+      margin-top: 10px;
     }
 
     a {
-      color: #ffcc99;
+      color: #ff7f50;
       text-decoration: none;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
+    a:hover {
+      text-decoration: underline;
     }
 
-    li {
-      color: #ff9999;
-      margin-top: 5px;
+    /* ===== FOOTER ===== */
+    footer {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 0;
+      text-align: center;
+      font-size: 0.85em;
+      color: #ddd;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
     }
   </style>
 </head>
 <body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Pan-Tea Logo">
+      <h2>Pan-Tea</h2>
+    </div>
+    <nav>
+      <a href="{{ url_for('landing') }}">Home</a>
+      <a href="{{ url_for('register') }}">Register</a>
+    </nav>
+  </header>
+
+  <!-- LOGIN FORM -->
   <div class="login-box">
-    <h2>Welcome Back!</h2>
-    <form method="POST">
+    <h2>Login to Your Account</h2>
+    <form method="POST" action="{{ url_for('login') }}">
       <input type="text" name="username" placeholder="Username" required><br>
       <input type="password" name="password" placeholder="Password" required><br>
       <button type="submit">Login</button>
     </form>
-    <p>Don't have an account? <a href="/register">Register</a></p>
+    <p>Don’t have an account? <a href="{{ url_for('register') }}">Register</a></p>
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -87,5 +184,11 @@
       {% endif %}
     {% endwith %}
   </div>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Pan-Tea. All rights reserved.
+  </footer>
+
 </body>
 </html>

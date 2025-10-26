@@ -114,10 +114,11 @@
       <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Pan-Tea Logo">
       <h2>Pan-Tea</h2>
     </div>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/about">About Us</a>
-      <a href="/contact">Contact Us</a>
+     <nav>
+      <a href="{{ url_for('menu') }}">Menu</a>
+      <a href="{{ url_for('about') }}">About Us</a>
+      <a href="{{ url_for('contact') }}">Contact Us</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
     </nav>
   </header>
 

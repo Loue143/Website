@@ -1,31 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Summary</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 0; }
-        .container { max-width: 600px; margin: 50px auto; padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
-        h1 { text-align: center; color: #333; }
-        .summary { font-size: 18px; margin-bottom: 20px; }
-        .total { font-size: 20px; font-weight: bold; color: #ff6347; }
-        button { background-color: #ffb6b9; color: white; border: none; cursor: pointer; padding: 10px; }
-        button:hover { background-color: #ff9a9d; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Summary | Pan-Tea</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: url("{{ url_for('static', filename='images/backroundsa.jpg') }}") no-repeat center center/cover;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    header {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 30px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+    }
+
+    header h2 {
+      color: #fff;
+      margin: 0;
+      font-size: 1.4em;
+      letter-spacing: 0.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+    }
+
+    nav a {
+      background-color: rgba(50, 205, 50, 0.85);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.9em;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    nav a:hover {
+      background-color: rgba(69, 230, 69, 1);
+      transform: scale(1.05);
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 100px;
+      padding-bottom: 70px;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      width: 90%;
+      max-width: 700px;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ffb6b9;
+      color: white;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ff6347;
+      margin-top: 10px;
+    }
+
+    /* BUTTONS */
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    button {
+      flex: 1;
+      max-width: 200px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+    .back-btn {
+      background-color: rgba(255, 198, 165, 0.9);
+    }
+
+    .back-btn:hover {
+      background-color: rgba(255, 176, 124, 1);
+      transform: translateY(-2px);
+    }
+
+    .confirm-btn {
+      background-color: rgba(255, 182, 185, 0.9);
+      color: white;
+    }
+
+    .confirm-btn:hover {
+      background-color: rgba(255, 154, 157, 1);
+      transform: translateY(-2px);
+    }
+
+    .empty {
+      text-align: center;
+      color: #666;
+      font-size: 18px;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.6);
+      color: #ddd;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 0.85em;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Order Summary</h1>
-    <div class="summary">
-        <p>Flavor: {{ flavor }}</p>
-        <p>Size: {{ size }}</p>
-        <p>Quantity: {{ quantity }}</p>
-        <p class="total">Total Price: ${{ total_price }}</p>
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Pan-Tea Logo">
+      <h2>Pan-Tea</h2>
     </div>
-    <button onclick="window.location.href='/'">Back to Order</button>
-</div>
+    <nav>
+      <a href="{{ url_for('menu') }}">Menu</a>
+      <a href="{{ url_for('about') }}">About Us</a>
+      <a href="{{ url_for('contact') }}">Contact Us</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+  </header>
 
+  <!-- MAIN CONTENT -->
+  <main>
+    <div class="container">
+      <h1>🧾 Your Order Summary</h1>
+
+      <table id="orderTable">
+        <thead>
+          <tr>
+            <th>Flavor</th>
+            <th>Size</th>
+            <th>Qty</th>
+            <th>Payment</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="orderBody">
+          <!-- Orders will appear here -->
+        </tbody>
+      </table>
+
+      <div class="total" id="grandTotal">Grand Total: $0.00</div>
+
+      <div class="button-group">
+        <button class="back-btn" onclick="window.location.href='{{ url_for('cart') }}'">← Back to Cart</button>
+        <button class="confirm-btn" onclick="finishOrder()">✅ Confirm Order</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Pan-Tea. All rights reserved.
+  </footer>
+
+  <script>
+    function loadOrders() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const tbody = document.getElementById('orderBody');
+      const grandTotalEl = document.getElementById('grandTotal');
+      tbody.innerHTML = '';
+
+      if (cart.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="empty">Your cart is empty.</td></tr>`;
+        grandTotalEl.textContent = 'Grand Total: $0.00';
+        return;
+      }
+
+      let grandTotal = 0;
+      cart.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.flavor}</td>
+          <td>${item.size}</td>
+          <td>${item.qty}</td>
+          <td>${item.payment}</td>
+          <td>$${item.total.toFixed(2)}</td>
+        `;
+        tbody.appendChild(row);
+        grandTotal += item.total;
+      });
+
+      grandTotalEl.textContent = `Grand Total: $${grandTotal.toFixed(2)}`;
+    }
+
+    function finishOrder() {
+      alert('🎉 Thank you for your purchase!');
+      localStorage.removeItem('cart');
+      window.location.href = '/';
+    }
+
+    window.onload = loadOrders;
+  </script>
 </body>
 </html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart | Pan-Tea</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: url("{{ url_for('static', filename='images/backroundsa.jpg') }}") no-repeat center center/cover;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    header {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 30px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+    }
+
+    header h2 {
+      color: #fff;
+      margin: 0;
+      font-size: 1.4em;
+      letter-spacing: 0.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 12px;
+    }
+
+    nav a {
+      background-color: rgba(50, 205, 50, 0.85);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.9em;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    nav a:hover {
+      background-color: rgba(69, 230, 69, 1);
+      transform: scale(1.05);
+    }
+
+    /* MAIN AREA */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 100px;
+      padding-bottom: 70px;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      width: 80%;
+      max-width: 700px;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 1.6em;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px 20px;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+      color: #444;
+      font-size: 0.9em;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .total {
+      grid-column: span 2;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ff6347;
+      margin-top: 10px;
+    }
+
+    /* BUTTONS */
+    button {
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      width: 100%;
+    }
+
+    .button-group {
+      grid-column: span 2;
+      display: flex;
+      gap: 15px;
+    }
+
+    .button-group button {
+      flex: 1;
+    }
+
+    .add-btn {
+      background: rgba(180, 225, 151, 0.9);
+    }
+
+    .add-btn:hover {
+      background: rgba(153, 210, 125, 1);
+      transform: translateY(-2px);
+    }
+
+    .secondary-btn {
+      background: rgba(255, 198, 165, 0.9);
+    }
+
+    .secondary-btn:hover {
+      background: rgba(255, 176, 124, 1);
+      transform: translateY(-2px);
+    }
+
+    .proceed-btn {
+      background: rgba(255, 182, 185, 0.9);
+      margin-top: 20px;
+    }
+
+    .proceed-btn:hover {
+      background: rgba(255, 154, 157, 1);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.6);
+      color: #ddd;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 0.85em;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      .button-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Pan-Tea Logo">
+      <h2>Pan-Tea</h2>
+    </div>
+    <nav>
+      <a href="{{ url_for('menu') }}">Menu</a>
+      <a href="{{ url_for('about') }}">About Us</a>
+      <a href="{{ url_for('contact') }}">Contact Us</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <div class="container">
+      <h1>Your Cart</h1>
+      <form id="cartForm">
+        <div>
+          <label for="flavor">Flavor:</label>
+          <select id="flavor" required>
+            <option value="Classic Milk Tea">Classic Milk Tea - $4.50</option>
+            <option value="Taro Milk Tea">Taro Milk Tea - $5.00</option>
+            <option value="Matcha Milk Tea">Matcha Milk Tea - $5.50</option>
+            <option value="Brown Sugar Milk Tea">Brown Sugar Milk Tea - $5.00</option>
+            <option value="Honeydew Milk Tea">Honeydew Milk Tea - $4.75</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="size">Size:</label>
+          <select id="size" required>
+            <option value="Small">Small</option>
+            <option value="Medium">Medium</option>
+            <option value="Large">Large</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" min="1" value="1" required>
+        </div>
+
+        <div>
+          <label for="payment">Payment Method:</label>
+          <select id="payment" required>
+            <option value="Cash">Cash</option>
+            <option value="Gcash">Gcash</option>
+            <option value="Credit Card">Credit Card</option>
+          </select>
+        </div>
+
+        <div class="total" id="totalPrice">Total: $4.50</div>
+
+        <!-- BUTTONS SAME SIZE -->
+        <div class="button-group">
+          <button type="button" class="add-btn" onclick="addToCart()">Add to Cart</button>
+          <button type="button" class="secondary-btn" onclick="window.location.href='/menu'">Add Another Flavor</button>
+        </div>
+      </form>
+
+      <button type="button" class="proceed-btn" onclick="proceedToSummary()">Proceed to Cart</button>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Pan-Tea. All rights reserved.
+  </footer>
+
+  <script>
+    const flavorSelect = document.getElementById('flavor');
+    const qtyInput = document.getElementById('quantity');
+    const totalDisplay = document.getElementById('totalPrice');
+
+    const prices = {
+      "Classic Milk Tea": 4.50,
+      "Taro Milk Tea": 5.00,
+      "Matcha Milk Tea": 5.50,
+      "Brown Sugar Milk Tea": 5.00,
+      "Honeydew Milk Tea": 4.75
+    };
+
+    function updateTotal() {
+      const flavor = flavorSelect.value;
+      const qty = parseInt(qtyInput.value) || 1;
+      const total = prices[flavor] * qty;
+      totalDisplay.textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    flavorSelect.addEventListener('change', updateTotal);
+    qtyInput.addEventListener('input', updateTotal);
+
+    function addToCart() {
+      const flavor = flavorSelect.value;
+      const size = document.getElementById('size').value;
+      const qty = parseInt(qtyInput.value);
+      const payment = document.getElementById('payment').value;
+      const total = prices[flavor] * qty;
+
+      const orderItem = { flavor, size, qty, payment, total };
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(orderItem);
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      alert('✅ Item added to cart!');
+    }
+
+    function proceedToSummary() {
+      window.location.href = '/order_summary';
+    }
+  </script>
+
+</body>
+</html>
