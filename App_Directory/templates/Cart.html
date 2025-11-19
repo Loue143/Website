@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cart | Pan-Tea</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -20,7 +18,7 @@
       flex-direction: column;
     }
 
-    /* HEADER */
+    /* ===== HEADER ===== */
     header {
       width: 100%;
       background: rgba(0, 0, 0, 0.6);
@@ -34,11 +32,7 @@
       z-index: 10;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .brand { display: flex; align-items: center; gap: 8px; }
 
     header img {
       width: 40px;
@@ -55,10 +49,7 @@
       letter-spacing: 0.5px;
     }
 
-    nav {
-      display: flex;
-      gap: 12px;
-    }
+    nav { display: flex; gap: 12px; }
 
     nav a {
       background-color: rgba(50, 205, 50, 0.85);
@@ -76,7 +67,7 @@
       transform: scale(1.05);
     }
 
-    /* MAIN AREA */
+    /* ===== MAIN ===== */
     main {
       flex: 1;
       display: flex;
@@ -87,20 +78,20 @@
     }
 
     .container {
-      background-color: rgba(255, 255, 255, 0.9);
-      width: 80%;
+      background-color: rgba(255, 255, 255, 0.92);
+      width: 85%;
       max-width: 700px;
       padding: 25px;
       border-radius: 16px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
     }
 
     h1 {
       text-align: center;
       color: #333;
       margin-bottom: 20px;
-      font-size: 1.6em;
+      font-size: 1.7em;
     }
 
     form {
@@ -134,7 +125,12 @@
       margin-top: 10px;
     }
 
-    /* BUTTONS */
+    .button-group {
+      grid-column: span 2;
+      display: flex;
+      gap: 15px;
+    }
+
     button {
       color: white;
       padding: 12px;
@@ -148,43 +144,14 @@
       width: 100%;
     }
 
-    .button-group {
-      grid-column: span 2;
-      display: flex;
-      gap: 15px;
-    }
+    .add-btn { background: rgba(180, 225, 151, 0.9); }
+    .add-btn:hover { background: rgba(153, 210, 125, 1); transform: translateY(-2px); }
 
-    .button-group button {
-      flex: 1;
-    }
+    .secondary-btn { background: rgba(255, 198, 165, 0.9); }
+    .secondary-btn:hover { background: rgba(255, 176, 124, 1); transform: translateY(-2px); }
 
-    .add-btn {
-      background: rgba(180, 225, 151, 0.9);
-    }
-
-    .add-btn:hover {
-      background: rgba(153, 210, 125, 1);
-      transform: translateY(-2px);
-    }
-
-    .secondary-btn {
-      background: rgba(255, 198, 165, 0.9);
-    }
-
-    .secondary-btn:hover {
-      background: rgba(255, 176, 124, 1);
-      transform: translateY(-2px);
-    }
-
-    .proceed-btn {
-      background: rgba(255, 182, 185, 0.9);
-      margin-top: 20px;
-    }
-
-    .proceed-btn:hover {
-      background: rgba(255, 154, 157, 1);
-      transform: translateY(-2px);
-    }
+    .proceed-btn { background: rgba(255, 182, 185, 0.9); margin-top: 20px; }
+    .proceed-btn:hover { background: rgba(255, 154, 157, 1); transform: translateY(-2px); }
 
     footer {
       background: rgba(0, 0, 0, 0.6);
@@ -198,15 +165,14 @@
     }
 
     @media (max-width: 600px) {
-      .button-group {
-        flex-direction: column;
-      }
+      .button-group { flex-direction: column; }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- HEADER -->
+  <!-- ===== HEADER ===== -->
   <header>
     <div class="brand">
       <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Pan-Tea Logo">
@@ -220,7 +186,7 @@
     </nav>
   </header>
 
-  <!-- MAIN -->
+  <!-- ===== MAIN CONTENT ===== -->
   <main>
     <div class="container">
       <h1>Your Cart</h1>
@@ -228,11 +194,18 @@
         <div>
           <label for="flavor">Flavor:</label>
           <select id="flavor" required>
-            <option value="Classic Milk Tea">Classic Milk Tea - $4.50</option>
-            <option value="Taro Milk Tea">Taro Milk Tea - $5.00</option>
-            <option value="Matcha Milk Tea">Matcha Milk Tea - $5.50</option>
-            <option value="Brown Sugar Milk Tea">Brown Sugar Milk Tea - $5.00</option>
-            <option value="Honeydew Milk Tea">Honeydew Milk Tea - $4.75</option>
+            <option value="Classic">Classic</option>
+            <option value="Wintermelon">Wintermelon</option>
+            <option value="Chocolate">Chocolate</option>
+            <option value="Strawberry">Strawberry</option>
+            <option value="Matcha">Matcha</option>
+            <option value="Thai Tea">Thai Tea</option>
+            <option value="Taro">Taro</option>
+            <option value="Mango">Mango</option>
+            <option value="Milk">Milk</option>
+            <option value="Jasmine">Jasmine</option>
+            <option value="Lychee">Lychee</option>
+            <option value="Hokkaido">Hokkaido</option>
           </select>
         </div>
 
@@ -255,20 +228,18 @@
           <select id="payment" required>
             <option value="Cash">Cash</option>
             <option value="Gcash">Gcash</option>
-            <option value="Credit Card">Credit Card</option>
           </select>
         </div>
 
-        <div class="total" id="totalPrice">Total: $4.50</div>
+        <div class="total" id="totalPrice">Price: ₱0.00</div>
 
-        <!-- BUTTONS SAME SIZE -->
         <div class="button-group">
           <button type="button" class="add-btn" onclick="addToCart()">Add to Cart</button>
-          <button type="button" class="secondary-btn" onclick="window.location.href='/menu'">Add Another Flavor</button>
+          <button type="button" class="secondary-btn" onclick="window.location.href='/menu'">View Menu</button>
         </div>
       </form>
 
-      <button type="button" class="proceed-btn" onclick="proceedToSummary()">Proceed to Cart</button>
+      <button type="button" class="proceed-btn" onclick="proceedToSummary()">Proceed to Checkout</button>
     </div>
   </main>
 
@@ -276,48 +247,81 @@
     &copy; 2025 Pan-Tea. All rights reserved.
   </footer>
 
+  <!-- ===== SCRIPT SECTION ===== -->
   <script>
     const flavorSelect = document.getElementById('flavor');
+    const sizeSelect = document.getElementById('size');
     const qtyInput = document.getElementById('quantity');
     const totalDisplay = document.getElementById('totalPrice');
 
-    const prices = {
-      "Classic Milk Tea": 4.50,
-      "Taro Milk Tea": 5.00,
-      "Matcha Milk Tea": 5.50,
-      "Brown Sugar Milk Tea": 5.00,
-      "Honeydew Milk Tea": 4.75
+    // === Base prices ===
+    const basePrices = {
+      "Classic": 100,
+      "Wintermelon": 100,
+      "Chocolate": 100,
+      "Strawberry": 100,
+      "Matcha": 100,
+      "Thai Tea": 100,
+      "Taro": 100,
+      "Mango": 100,
+      "Milk": 100,
+      "Jasmine": 100,
+      "Lychee": 100,
+      "Hokkaido": 100
     };
 
+    // === Preselect flavor from URL (e.g., /cart?flavor=Matcha) ===
+    const params = new URLSearchParams(window.location.search);
+    const selectedFlavor = params.get('flavor');
+    if (selectedFlavor && flavorSelect.querySelector(`option[value="${selectedFlavor}"]`)) {
+      flavorSelect.value = selectedFlavor;
+    }
+
+    // === Update total with size adjustment ===
     function updateTotal() {
       const flavor = flavorSelect.value;
+      const size = sizeSelect.value;
       const qty = parseInt(qtyInput.value) || 1;
-      const total = prices[flavor] * qty;
-      totalDisplay.textContent = `Total: $${total.toFixed(2)}`;
+      let base = basePrices[flavor];
+
+      // Add ₱50 for Medium, ₱100 for Large
+      if (size === "Medium") base += 50;
+      else if (size === "Large") base += 100;
+
+      const total = base * qty;
+      totalDisplay.textContent = `Price: ₱${total.toFixed(2)}`;
     }
 
     flavorSelect.addEventListener('change', updateTotal);
+    sizeSelect.addEventListener('change', updateTotal);
     qtyInput.addEventListener('input', updateTotal);
+    updateTotal();
 
+    // === Add to Cart ===
     function addToCart() {
       const flavor = flavorSelect.value;
-      const size = document.getElementById('size').value;
+      const size = sizeSelect.value;
       const qty = parseInt(qtyInput.value);
       const payment = document.getElementById('payment').value;
-      const total = prices[flavor] * qty;
 
+      let base = basePrices[flavor];
+      if (size === "Medium") base += 50;
+      else if (size === "Large") base += 100;
+
+      const total = base * qty;
       const orderItem = { flavor, size, qty, payment, total };
+
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
       cart.push(orderItem);
       localStorage.setItem('cart', JSON.stringify(cart));
 
-      alert('✅ Item added to cart!');
+      alert(`✅ Added to cart! (${size} ${flavor} - ₱${total.toFixed(2)})`);
+      updateTotal();
     }
 
     function proceedToSummary() {
       window.location.href = '/order_summary';
     }
   </script>
-
 </body>
 </html>

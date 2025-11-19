@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Pan-Tea Menu</title>
   <style>
+    /* ===== GENERAL ===== */
     body {
       margin: 0;
       padding: 0;
@@ -15,150 +16,205 @@
       min-height: 100vh;
     }
 
-    /* Header */
+    /* ===== HEADER ===== */
     header {
       width: 100%;
       background: rgba(0, 0, 0, 0.6);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 40px;
-      box-sizing: border-box;
+      padding: 8px 30px;
       position: fixed;
       top: 0;
       left: 0;
       z-index: 10;
+      box-sizing: border-box;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
     }
 
     header img {
-      width: 60px;
-      height: 60px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid white;
     }
 
     header h2 {
-      font-size: 1.8em;
-      margin: 0;
       color: #fff;
-      letter-spacing: 1px;
+      margin: 0;
+      font-size: 1.4em;
+      letter-spacing: 0.5px;
     }
 
     nav {
       display: flex;
-      gap: 15px;
+      gap: 12px;
     }
 
     nav a {
-      background-color: #32cd32;
+      background-color: rgba(50, 205, 50, 0.85);
       color: white;
-      padding: 8px 18px;
-      border-radius: 25px;
+      padding: 6px 14px;
+      border-radius: 20px;
       text-decoration: none;
-      font-size: 1em;
-      transition: background 0.3s ease;
+      font-size: 0.9em;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(4px);
     }
 
     nav a:hover {
-      background-color: #45e645;
-    }
-
-    /* Main Content */
-    main {
-      flex: 1;
-      margin-top: 120px; /* offset for header */
-      margin-bottom: 80px; /* offset for footer */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.5em;
-      color: #fff;
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
-      margin-bottom: 30px;
-    }
-
-    .tea-item-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .tea-item {
-      text-align: center;
-      background-color: rgba(255, 255, 255, 0.9);
-      color: #333;
-      width: 200px;
-      padding: 15px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .tea-item a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .tea-item img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
-    }
-
-    .tea-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .tea-item:hover img {
+      background-color: rgba(69, 230, 69, 1);
       transform: scale(1.05);
     }
 
-    .product-name {
-      font-size: 1.1em;
-      font-weight: bold;
-      margin-top: 10px;
+    /* ===== MAIN ===== */
+    main {
+      flex: 1;
+      margin-top: 100px;
+      margin-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    /* Footer */
+    .main-container {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      padding: 20px 15px;
+      width: 95%;
+      max-width: 1300px; /* wider to fit 6 columns */
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .main-container h1 {
+      font-size: 2em;
+      color: #fff;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ===== GRID (6 columns × 2 rows) ===== */
+    .tea-item-container {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px; /* tighter spacing */
+      justify-items: center;
+      align-items: center;
+    }
+
+    /* ===== ITEM BLOCK ===== */
+    .item-block {
+      text-align: center;
+      margin: 0;
+    }
+
+    /* ===== TEA CARD ===== */
+    .tea-item {
+      position: relative;
+      background: #ffffff;
+      border-radius: 20px;
+      width: 180px;
+      height: 230px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .tea-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    /* ===== LOGO ICON ===== */
+    .tea-item .logo-icon {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #fff;
+      padding: 2px;
+      object-fit: cover;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      z-index: 5;
+    }
+
+    /* ===== PRODUCT IMAGES (centered and balanced) ===== */
+    .tea-item a img {
+      width: 90%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 15px;
+      display: block;
+      margin: 0 auto;
+      transition: transform 0.3s ease;
+      background: #fff;
+      padding: 4px; /* smaller white border */
+      filter: brightness(1.05) contrast(1.05); /* natural brightness */
+    }
+
+    .tea-item:hover a img {
+      transform: scale(1.08);
+    }
+
+    /* ===== PRODUCT NAME ===== */
+    .product-name {
+      font-size: 1em;
+      font-weight: 600;
+      color: #fff;
+      margin-top: 3px;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    /* ===== FOOTER ===== */
     footer {
       background: rgba(0, 0, 0, 0.6);
-      padding: 12px 0;
+      padding: 10px 0;
       text-align: center;
       color: #ddd;
-      font-size: 0.9em;
+      font-size: 0.85em;
       position: fixed;
       bottom: 0;
       width: 100%;
     }
 
-    /* Responsive */
-    @media (min-width: 768px) {
-      .tea-item {
-        width: 250px;
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .tea-item-container {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 800px) {
+      .tea-item-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .tea-item-container {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
 </head>
+
 <body>
 
-  <!-- Header -->
+  <!-- ===== HEADER ===== -->
   <header>
     <div class="brand">
       <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Pan-Tea Logo">
@@ -172,49 +228,41 @@
     </nav>
   </header>
 
-  <!-- Main Content -->
+  <!-- ===== MAIN CONTENT ===== -->
   <main>
-    <h1>🍵 Our Milk Tea Menu</h1>
+    <div class="main-container">
+      <h1>🍵 Our Delicious Milk Teas</h1>
 
-    <div class="tea-item-container">
-      <div class="tea-item">
-        <a href="{{ url_for('cart') }}">
-          <img src="{{ url_for('static', filename='images/milk.jpg') }}" alt="Classic Milk Tea">
-        </a>
-        <div class="product-name">Classic Milk Tea - $4.50</div>
-      </div>
-
-      <div class="tea-item">
-        <a href="{{ url_for('cart') }}">
-          <img src="{{ url_for('static', filename='images/milk3.jpg') }}" alt="Taro Milk Tea">
-        </a>
-        <div class="product-name">Taro Milk Tea - $5.00</div>
-      </div>
-
-      <div class="tea-item">
-        <a href="{{ url_for('cart') }}">
-          <img src="{{ url_for('static', filename='images/milk4.jpg') }}" alt="Matcha Milk Tea">
-        </a>
-        <div class="product-name">Matcha Milk Tea - $5.50</div>
-      </div>
-
-      <div class="tea-item">
-        <a href="{{ url_for('cart') }}">
-          <img src="{{ url_for('static', filename='images/brown_sugar.jpg') }}" alt="Brown Sugar Milk Tea">
-        </a>
-        <div class="product-name">Brown Sugar Milk Tea - $5.00</div>
-      </div>
-
-      <div class="tea-item">
-        <a href="{{ url_for('cart') }}">
-          <img src="{{ url_for('static', filename='images/honeydew.jpg') }}" alt="Honeydew Milk Tea">
-        </a>
-        <div class="product-name">Honeydew Milk Tea - $4.75</div>
+      <div class="tea-item-container">
+        {% for tea in [
+          ('Milk1.png', 'Classic'),
+          ('Milk2.png', 'Wintermelon'),
+          ('Milk3.png', 'Chocolate'),
+          ('Milk4.png', 'Strawberry'),
+          ('Milk5.png', 'Matcha'),
+          ('Milk6.png', 'Thai Tea'),
+          ('Milk7.png', 'Taro'),
+          ('Milk8.png', 'Mango'),
+          ('Milk9.png', 'Milk'),
+          ('Milk10.png', 'Jasmine'),
+          ('Milk11.png', 'Lychee'),
+          ('Milk12.png', 'Hokkaido')
+        ] %}
+        <div class="item-block">
+          <div class="tea-item">
+            <img class="logo-icon" src="{{ url_for('static', filename='images/logo.jpg') }}" alt="icon">
+            <a href="{{ url_for('cart') }}?flavor={{ tea[1] }}">
+              <img src="{{ url_for('static', filename='images/' + tea[0]) }}" alt="{{ tea[1] }}">
+            </a>
+          </div>
+          <div class="product-name">{{ tea[1] }}</div>
+        </div>
+        {% endfor %}
       </div>
     </div>
   </main>
 
-  <!-- Footer -->
+  <!-- ===== FOOTER ===== -->
   <footer>
     &copy; 2025 Pan-Tea. All rights reserved.
   </footer>
